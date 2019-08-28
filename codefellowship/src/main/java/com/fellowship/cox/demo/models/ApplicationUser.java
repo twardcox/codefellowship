@@ -7,9 +7,11 @@ import javax.persistence.*;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,15 @@ public class ApplicationUser implements UserDetails {
     public String lastName;
     public Date dateOfBirth;
     public String bio;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    List<UserPost> userPost;
+
+    public List<UserPost> getUserPost(){
+        return this.userPost;
+    }
+
+    public long getId() { return this.id; }
 
     public String getFirstName() {
         return this.firstName;
