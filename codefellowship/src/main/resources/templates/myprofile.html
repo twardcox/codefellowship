@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style.css">
     <title>Profile</title>
 </head>
 <body>
 <h1>My Profile</h1>
 <div th:if="${user}">
-    Hello, <span th:text="${user.name}"></span> This is the data that we have collected on you!
+    Hello, <span th:text="${user.username}"></span> This is the data that we have collected on you!
 
-    <h2>First Name: <span  th:text="${firstName}"></span></h2>
-    <h2>Last Name: <span  th:text="${lastName}"></span></h2>
-    <h2>Date of Birth: <span  th:text="${dateOfBirth}"></span></h2>
-    <img src="src/main/resources/static/images/default.jpg">
+    <h2>First Name: <span  th:text="${user.firstName}"></span></h2>
+    <h2>Last Name: <span  th:text="${user.lastName}"></span></h2>
+    <h2>Date of Birth: <span  th:text="${user.dateOfBirth}"></span></h2>
+    <img src="/default.png">
     <h2>Biography:</h2>
-    <p th:text="${bio}"></p>
+    <p th:text="${user.bio}"></p>
 
 
 

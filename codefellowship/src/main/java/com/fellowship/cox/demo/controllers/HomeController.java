@@ -17,16 +17,23 @@ public class HomeController {
     @GetMapping("/")
     public String getRoot(Principal p, Model m){
 
-        ApplicationUser applicationUser = applicationUserRepository.findByUsername(p.getName());
-
+        ApplicationUser applicationUser = null;
+        if(p != null){
+            applicationUser=applicationUserRepository.findByUsername(p.getName());
+        }
         m.addAttribute("user", applicationUser);
 
-        return "root";
+        return "myprofile";
     }
 
     @GetMapping("/myprofile")
     public String getProfile(Principal p, Model m){
-        m.addAttribute("user", p);
+        ApplicationUser applicationUser = null;
+        if(p!=null){
+            applicationUser=applicationUserRepository.findByUsername(p.getName());
+        }
+        m.addAttribute("user", applicationUser);
+
         return "myprofile";
     }
 
