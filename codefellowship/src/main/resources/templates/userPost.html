@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" action="/user/post">
+    <h1>Hello <span th:text="${user.username}"></span>, You have something you want to
+        say to the class?</h1>
+
+    <label for="body">text:</label> <input type="text" name="body" id="body"/>
+
+
+    <input type="submit"/>
+</form>
+</body>
+</html>

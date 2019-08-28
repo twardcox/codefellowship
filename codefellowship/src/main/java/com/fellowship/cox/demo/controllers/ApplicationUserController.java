@@ -42,13 +42,13 @@ public class ApplicationUserController {
         ApplicationUser a = applicationUserRepository.findById(id);
         m.addAttribute("user", a);
 
-        return "root";
+        return "users";
     }
 
 
 //    @GetMapping("/login")
-//    public String getLoginPage(){
-//        return "login";
-//    }
+////    public String getLoginPage(){
+////        return "login";
+////    }
 
 }
