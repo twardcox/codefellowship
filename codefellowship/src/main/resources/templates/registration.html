@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Sign up</title>
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <form method="post" action="/users">
     <label for="firstName">First Name:</label> <input name="firstName" id="firstName"/>
     <label for="lastName">Last Name:</label> <input name="lastName" id="lastName"/>
