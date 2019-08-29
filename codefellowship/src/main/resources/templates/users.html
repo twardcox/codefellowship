@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
+<head th:replace="fragments/header :: head"></head>d>
 <body>
 <div th:replace="fragments/header :: header"></div>
     <h1>User Page</h1>
@@ -16,6 +13,8 @@
         <img src="src/main/resources/static/images/default.jpg">
         <h2>Biography:</h2>
         <p th:text="${user.bio}"></p>
+
+
 
         <label>POSTS</label>
         <p th:each="post : ${user.userPost}"><span th:text="${post.body}"></span> </p>

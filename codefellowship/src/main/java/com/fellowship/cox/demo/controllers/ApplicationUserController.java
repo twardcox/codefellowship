@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,6 +44,14 @@ public class ApplicationUserController {
         m.addAttribute("user", a);
 
         return "users";
+    }
+    @PostMapping("/user/{id}")
+    public RedirectView addUserLike(long likedUser, Principal p) {
+        ApplicationUser likingPerson = applicationUserRepository.findByUsername(p.getName());
+
+        likingPerson.addLike(applicationUserRepository.findById(likedUser));
+        applicationUserRepository.save(likingPerson);
+        return new RedirectView("/");
     }
 
 
