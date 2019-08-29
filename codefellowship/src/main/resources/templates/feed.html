@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/header :: head"></head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<h1>The posts of everyone you are following</h1>
+
+<ul>
+    <li th:each="person : ${user.UsersThatILike}">
+        <span th:text="${person.firstName}"></span><br>
+        <p th:each="post : ${person.userPost}" th:text="${post}"></p><br>
+    </li>
+</ul>
+
+</body>
+</html>

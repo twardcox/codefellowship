@@ -6,29 +6,18 @@
 <div th:replace="fragments/header :: header"></div>
 <div>
     <div class="w3-panel w3-light-blue">
-    <h2>First Name: <span  th:text="${user.firstName}"></span></h2>
-    </div>
-    <div class="w3-panel w3-light-blue">
-    <h2>Last Name: <span  th:text="${user.lastName}"></span></h2>
-    </div>
-    <div class="w3-panel w3-light-blue">
-    <h2>Date of Birth: <span  th:text="${user.dateOfBirth}"></span></h2>
-    </div>
-    <img src="/default.png">
-    <div class="w3-panel w3-light-blue">
-    <h2>Biography:</h2>
-    <p th:text="${user.bio}"></p>
-    </div>
-    <div class="w3-panel w3-light-blue">
-    <p th:each="post : ${user.userPost}"><span th:text="${post.body}"></span> </p>
+        <h2>Name: <span  th:text="${user.firstName }"></span></h2>
     </div>
 
-    <ul>
-        <li th:each="person : ${user.UsersThatILike}">
-            <span th:text="${person.firstName}"></span><br>
-            <p th:each="post : ${person.userPost}" th:text="${post}"></p><br>
-        </li>
-    </ul>
+    <form method="post" action="/user/likes">
+    <h1>Select a user to follow</h1>
+    <select name="likedUser">
+        <option th:each="person : ${users}" th:text="${person.firstName}"
+                th:value="${person.id}"></option>
+    </select>
+
+    <input type="submit" name="Follow" value="Follow"/>
+    </form>
 
 
 

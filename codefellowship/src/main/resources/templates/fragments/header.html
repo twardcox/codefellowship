@@ -1,10 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/style.css">
+    <title>CodeFellowship</title>
+</div>
 
 <div th:fragment="header" class="jumbotron text-center" th:if="${user}">
     <h1>My Profile</h1>
     Hello, <span th:text="${user.username}"></span> Please support our information
     gathering process.
+    <div><a href="/user/post">Posts</a> <a href="/myprofile">My Profile</a> <a
+        href="/user/likes">My Likes</a><a href="/feed">My Feed</a> </div>
 </div>
 
 </html>

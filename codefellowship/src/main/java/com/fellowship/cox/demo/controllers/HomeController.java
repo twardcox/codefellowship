@@ -33,7 +33,7 @@ public class HomeController {
         ApplicationUser applicationUser = null;
 
         if(p!=null){
-            applicationUser=applicationUserRepository.findByUsername(p.getName());
+            applicationUser = applicationUserRepository.findByUsername(p.getName());
 
 
         }

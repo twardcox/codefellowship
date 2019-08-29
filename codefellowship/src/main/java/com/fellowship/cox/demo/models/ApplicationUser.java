@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -25,6 +26,17 @@ public class ApplicationUser implements UserDetails {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     List<UserPost> userPost;
+
+    @ManyToMany
+    @JoinTable(
+      name = "user_likes",
+      joinColumns = { @JoinColumn(name = "primaryUser")},
+      inverseJoinColumns = { @JoinColumn(name = "likedUser")}
+    )
+    Set<ApplicationUser> UsersThatILike;
+
+    @ManyToMany(mappedBy = "UsersThatILike")
+    Set<ApplicationUser> UsersThatLikeMe;
 
     public List<UserPost> getUserPost(){
         return this.userPost;
@@ -46,6 +58,29 @@ public class ApplicationUser implements UserDetails {
 
     public String getBio() {
         return this.bio;
+    }
+
+    public void addLike(ApplicationUser likedUser) {
+        UsersThatILike.add(likedUser);
+    }
+
+    public Set<ApplicationUser> getUsersThatILike(){
+        return this.UsersThatILike;
+    }
+
+    public String toString(){
+        StringBuilder likedUserString = new StringBuilder();
+        if (this.UsersThatILike.size() > 0){
+            likedUserString.append(" who likes ");
+            for (ApplicationUser likedUser : this.UsersThatILike){
+                likedUserString.append(likedUser.username);
+                likedUserString.append(", ");
+            }
+            likedUserString.delete(likedUserString.length() - 2,
+              likedUserString.length());
+        }
+        return String.format("%s %s %s", this.firstName, this.lastName,
+          likedUserString.toString());
     }
 
     public ApplicationUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio){

@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign up</title>
-</head>
+<head th:replace="fragments/header :: head"></head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <form method="post" action="/users">
-    <label for="firstName">First Name:</label> <input name="firstName" id="firstName"/>
-    <label for="lastName">Last Name:</label> <input name="lastName" id="lastName"/>
-    <label for="dateOfBirth">Birth Date:</label> <input name="dateOfBirth" id="dateOfBirth"/>
-    <label for="username">User name:</label> <input name="username" id="username" />
-    <label for="password">Password:</label> <input type="password" name="password" id="password"/>
-    <label for="bio">Biography:</label> <input type="text" name="bio" id="bio"/>
-    <input type="submit"/>
+    <div class="form-group">
+    <label for="firstName">First Name:</label> <input class="form-control" name="firstName" id="firstName"/>
+    </div>
+    <div class="form-group">
+    <label for="lastName">Last Name:</label> <input class="form-control" name="lastName" id="lastName"/>
+    </div>
+    <div class="form-group">
+    <label for="dateOfBirth">Birth Date:</label> <input class="form-control" name="dateOfBirth"
+                                                         id="dateOfBirth"/>
+    </div>
+    <div class="form-group">
+    <label for="username">User name:</label> <input class="form-control" name="username" id="username" />
+    </div>
+    <div class="form-group">
+    <label for="password">Password:</label> <input class="form-control" type="password" name="password"
+                                                    id="password"/>
+    </div>
+    <div class="form-group">
+    <label for="bio">Biography:</label>
+        <textarea class="form-control" rows="5" name="bio" id="bio"></textarea>
+
+    </div>
+    <input class="btn btn-primary" type="submit"/>
+
 </form>
 </body>
 </html>

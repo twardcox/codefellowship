@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Log in</title>
-</head>
+<head th:replace="fragments/header :: head"></head>
 <body>
     <form method="post" action="/login">
         <label for="username">User name:</label> <input name="username" id="username" />

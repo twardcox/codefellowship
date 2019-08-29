@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -33,6 +34,30 @@ public class UserPostController {
     return "userPost";
   }
 
+  @GetMapping("/user/likes")
+  public String geUserLikesForm(Principal p, Model m){
+
+    ApplicationUser applicationUser = null;
+    if(p != null){
+      applicationUser=applicationUserRepository.findByUsername(p.getName());
+
+    }
+
+    m.addAttribute("user", applicationUser);
+    m.addAttribute("users", applicationUserRepository.findAll());
+    return "mylikes";
+  }
+
+  @PostMapping("/user/likes")
+  public RedirectView addUserLike(long likedUser, Principal p) {
+    ApplicationUser likingPerson = applicationUserRepository.findByUsername(p.getName());
+
+    likingPerson.addLike(applicationUserRepository.findById(likedUser));
+    applicationUserRepository.save(likingPerson);
+    return new RedirectView("/");
+  }
+
+
   @PostMapping("/user/post")
   public RedirectView createPost(String body, Principal p){
     ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
@@ -41,6 +66,21 @@ public class UserPostController {
     UserPost userPost = new UserPost(body, createdAt, loggedInUser);
     userPostRepository.save(userPost);
     return new RedirectView("/users/" + loggedInUser.getId());
+  }
+
+  @GetMapping("/feed")
+  public String getProfile(Principal p, Model m){
+    ApplicationUser applicationUser = null;
+
+    if(p!=null){
+      applicationUser = applicationUserRepository.findByUsername(p.getName());
+
+
+    }
+    m.addAttribute("user", applicationUser);
+
+
+    return "feed";
   }
 
 
