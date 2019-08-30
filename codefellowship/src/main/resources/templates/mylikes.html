@@ -11,6 +11,8 @@
 
     <form method="post" action="/user/likes">
     <h1>Select a user to follow</h1>
+        <h2>This is a list of all users, including yourself. Don't follow yourself.</h2>
+        <h3>That would be weird.</h3>
     <select name="likedUser">
         <option th:each="person : ${users}" th:text="${person.firstName}"
                 th:value="${person.id}"></option>

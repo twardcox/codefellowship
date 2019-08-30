@@ -14,6 +14,10 @@
         <h2>Biography:</h2>
         <p th:text="${user.bio}"></p>
 
+        <form th:action="${'/like/' + user.id}" method="POST" th:if="${user.id != loggedInUser.id}">
+            <input type="submit" value="Follow" />
+        </form>
+
 
 
         <label>POSTS</label>

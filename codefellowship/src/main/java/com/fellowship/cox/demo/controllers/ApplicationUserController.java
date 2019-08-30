@@ -9,9 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -38,13 +36,16 @@ public class ApplicationUserController {
         return new RedirectView("/myprofile");
     }
 
-    @GetMapping("/users/{id}")
-    public String getUser(@PathVariable(required = false) long id, Model m){
+    @GetMapping("/user/{id}")
+    public String getUser(@PathVariable(required = false) long id, Model m, Principal p){
         ApplicationUser a = applicationUserRepository.findById(id);
         m.addAttribute("user", a);
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+        m.addAttribute("loggedInUser", loggedInUser);
 
         return "users";
     }
+
     @PostMapping("/user/{id}")
     public RedirectView addUserLike(long likedUser, Principal p) {
         ApplicationUser likingPerson = applicationUserRepository.findByUsername(p.getName());
@@ -54,10 +55,12 @@ public class ApplicationUserController {
         return new RedirectView("/");
     }
 
-
-//    @GetMapping("/login")
-////    public String getLoginPage(){
-////        return "login";
-////    }
+    @PostMapping(value="/like/{likedUser}")
+    public RedirectView followUser(@PathVariable long likedUser, Principal p, Model m) {
+        ApplicationUser likingPerson = applicationUserRepository.findByUsername(p.getName());
+        likingPerson.addLike(applicationUserRepository.findById(likedUser));
+        applicationUserRepository.save(likingPerson);
+        return new RedirectView("/feed");
+    }
 
 }
