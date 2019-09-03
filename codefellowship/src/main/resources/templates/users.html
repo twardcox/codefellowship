@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/header :: head"></head>d>
+<head th:replace="fragments/header :: head"></head>
 <body>
-<div th:replace="fragments/header :: header"></div>
-    <h1>User Page</h1>
-    <div th:if="${user}">
-        Hello, <span th:text="${user.firstName}"></span> This is the data that we have collected on you!
 
-        <h2>First Name: <span  th:text="${user.firstName}"></span></h2>
-        <h2>Last Name: <span  th:text="${user.lastName}"></span></h2>
-        <h2>Date of Birth: <span  th:text="${user.dateOfBirth}"></span></h2>
-        <img src="src/main/resources/static/images/default.jpg">
+<div th:replace="fragments/header :: header"></div>
+<h1>My Posts</h1>
+<div>
+
+    <div class="w3-panel w3-light-blue">
         <h2>Biography:</h2>
         <p th:text="${user.bio}"></p>
-
-        <form th:action="${'/like/' + user.id}" method="POST" th:if="${user.id != loggedInUser.id}">
-            <input type="submit" value="Follow" />
-        </form>
-
-
-
-        <label>POSTS</label>
-        <p th:each="post : ${user.userPost}"><span th:text="${post.body}"></span> </p>
-
-
-
-        <a href="/logout">Log out</a>
     </div>
+    <div class="w3-panel w3-light-blue">
+        <p th:each="post : ${user.userPost}"><span th:text="${post.body}"></span> </p>
+    </div>
+
+
+    <a href="/logout">Log out</a>
+</div>
 <div th:unless="${user}">
     <a href="/login">Log in</a>
     <a href="/signup">Sign up</a>
 </div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
