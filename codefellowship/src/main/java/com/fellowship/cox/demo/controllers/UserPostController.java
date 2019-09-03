@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -54,7 +53,7 @@ public class UserPostController {
 
     likingPerson.addLike(applicationUserRepository.findById(likedUser));
     applicationUserRepository.save(likingPerson);
-    return new RedirectView("/");
+    return new RedirectView("/myprofile");
   }
 
 
@@ -65,8 +64,9 @@ public class UserPostController {
 
     UserPost userPost = new UserPost(body, createdAt, loggedInUser);
     userPostRepository.save(userPost);
-    return new RedirectView("/users/" + loggedInUser.getId());
+    return new RedirectView("/user/" + loggedInUser.getId());
   }
+
 
   @GetMapping("/feed")
   public String getProfile(Principal p, Model m){
